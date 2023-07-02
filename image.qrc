@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/background.png</file>
+        <file>image/chien-pao.png</file>
+        <file>image/hp.png</file>
+        <file>image/ironbundle.png</file>
+        <file>image/msgbar.png</file>
+        <file>image/skillbar.png</file>
+        <file>image/4gm1.jpg</file>
+        <file>image/533q.jpg</file>
+        <file>image/1305.jpg</file>
+        <file>image/5339.jpg</file>
+        <file>image/title.png</file>
+    </qresource>
+</RCC>
