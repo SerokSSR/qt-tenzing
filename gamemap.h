@@ -2,17 +2,8 @@
 #define GAMEMAP_H
 
 #include "qpainter.h"
+#include "const.h"
 #include <QObject>
-
-enum {
-    Grass,
-    Cigar,
-    Elec,
-    Jiu,
-};
-
-constexpr int Size = 20;
-constexpr int N = 20;
 
 
 class GameMap : public QObject
@@ -26,11 +17,10 @@ public:
     void Paint(QPainter* _p, QPoint _Pos);
 
     void InitByRand();
-    void PaintDialog(QPainter* _p, QPoint _Pos);
-
     int mRow;
     int mCol;
     int mPArr[440][440];
+    int curRow, curCol;
 
 signals:
 

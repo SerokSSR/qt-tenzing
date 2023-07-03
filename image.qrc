@@ -11,5 +11,7 @@
         <file>image/1305.jpg</file>
         <file>image/5339.jpg</file>
         <file>image/title.png</file>
+        <file>image/snow.jpg</file>
+        <file>image/dialog.png</file>
     </qresource>
 </RCC>

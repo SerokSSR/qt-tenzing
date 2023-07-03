@@ -28,7 +28,8 @@ private:
     Role* mRole;
     QTimer* mTimer;
 
-    bool active;
-    int actx, acty, actRole;
+    bool active; int actx, acty, actRole;
+    bool pick; int pickType;
+
 };
 #endif // WIDGET_H

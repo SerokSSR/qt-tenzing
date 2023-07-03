@@ -19,9 +19,10 @@ Widget::Widget(QWidget *parent)
 
     // 定时调用更新函数
     connect(mTimer, &QTimer::timeout, [this]() {this->update(); });
-    setFixedSize(1024, 500);
+    setFixedSize(1000, 800);
     
     active = false;
+    pick = false;
     this->update();
 }
 
@@ -34,24 +35,42 @@ Widget::~Widget()
 void Widget::paintEvent(QPaintEvent* event) {
     mMapPainter->begin(this);
 
-    //mMapPainter->drawImage(QRect(0, 0, 1050, 490), QImage("://image/background.png"));
+    //mMapPainter->drawImage(QRect(0, 0, 800, 500), QImage("://image/title.png"));
+
+
+    //设置主窗口背景颜色
+    QPainter painter(this);
+
+    QColor color(246,240,235);
+    painter.setBrush(color);
+    painter.drawRect(this->rect());
 
     mMap->Paint(mMapPainter, QPoint(0, 0));
     
     mRole->Paint(mMapPainter, QPoint(0, 0));
 
-    if(active) mMap->PaintDialog(mMapPainter, QPoint(20, 700));
-
+    if(active) {
+        mRole->PaintDialog(mMapPainter, mMap->mPArr[mRole->mRow][mRole->mCol]);
+    }
+    if(pick) {
+        mRole->PaintDialog(mMapPainter, pickType);
+    }
     mMapPainter->end();
-    QPainter painter(this);
-    painter.setPen(QPen(Qt::red,3));
-    painter.drawText(QRect(acty*20, (actx+1)*20, 20, 70), Qt::AlignCenter, "黄河之水天上来\n奔流到海不复回");
 }
 
 void Widget::keyPressEvent(QKeyEvent* event) {
     printf("keypressevent happened\n");
-    active = false;
+    pick = false;
     switch(event->key()) {
+    case Qt::Key_Space: {
+        // 进入战斗系统
+        break;
+    }
+    case Qt::Key_Escape: {
+        // 退出对话
+        active = false;
+        break;
+    }
     case Qt::Key_W:
     case Qt::Key_Up: {
         //逻辑碰撞检测函数
@@ -79,7 +98,8 @@ void Widget::keyPressEvent(QKeyEvent* event) {
 
     case Qt::Key_E: {
         // 显示交互
-        active = true;
+        //setOpacity(0.4);
+        active = not active;
         actx = mRole->mRow; acty = mRole->mCol;
         break;
     }
@@ -89,10 +109,16 @@ void Widget::keyPressEvent(QKeyEvent* event) {
 void Widget::Collision(int _dRow, int _dCol) {
     int newRow = mRole->mRow + _dRow;
     int newCol = mRole->mCol + _dCol;
-//    if(newRow < 0 or newRow >= 20 or newCol < 0 or newCol >= 20) return ;
+    if(newRow < 0 or newRow >= 20 or newCol < 0 or newCol >= 20) return ;
 //    if(mPMap->mPArr[newRow][newCol] == 1) {
 //        return;
 //    }
     //else move
     mRole->Move(_dRow, _dCol);
+    if(mMap->mPArr[mRole->mRow][mRole->mCol] > 0 and mMap->mPArr[mRole->mRow][mRole->mCol] < 3) {
+        pick = true;
+        pickType = mMap->mPArr[mRole->mRow][mRole->mCol];
+        mMap->mPArr[mRole->mRow][mRole->mCol] = 0;
+    }
+
 }

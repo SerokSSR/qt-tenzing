@@ -15,6 +15,7 @@ SOURCES += \
     widget.cpp
 
 HEADERS += \
+    const.h \
     gamemap.h \
     role.h \
     widget.h

@@ -21,5 +21,11 @@ void Role::Move(int _dRow, int _dCol) {
 
 void Role::Paint(QPainter* _p, QPoint _Pos) {
     printf("role::paint happened\n");
-    _p->drawImage(QRect(_Pos.x() + mCol*20, _Pos.y() + mRow*20, 20, 20), mImg);
+    _p->drawImage(QRect(_Pos.x() + mCol*Size, _Pos.y() + mRow*Size, Size, Size), mImg);
+}
+
+void Role::PaintDialog(QPainter* _p, int _type) {
+    _p->drawImage(QRect(20, 300,600, 500), QImage(":/image/dialog.png"));
+    _p->setPen(QPen(Qt::black,10));
+    _p->drawText(QRect(600, 100, 400, 200), Qt::AlignCenter, dialog[_type][0]);
 }
