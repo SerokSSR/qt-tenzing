@@ -4,9 +4,9 @@
 #include <QKeyEvent>
 #include <QTimer>
 
-Widget::Widget(QWidget *parent)
+Widget1::Widget1(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::Widget)
+    , ui(new Ui::Widget1)
 {
     ui->setupUi(this);
     
@@ -19,35 +19,38 @@ Widget::Widget(QWidget *parent)
 
     // 定时调用更新函数
     connect(mTimer, &QTimer::timeout, [this]() {this->update(); });
-    setFixedSize(1000, 800);
+    setFixedSize(1200, 850);
     
     active = false;
     pick = false;
     this->update();
 }
 
-Widget::~Widget()
+Widget1::~Widget1()
 {
     delete ui;
 }
 
 
-void Widget::paintEvent(QPaintEvent* event) {
+void Widget1::paintEvent(QPaintEvent* event) {
     mMapPainter->begin(this);
 
-    //mMapPainter->drawImage(QRect(0, 0, 800, 500), QImage("://image/title.png"));
+    mMapPainter->setOpacity(0.7);
+    mMapPainter->drawImage(QRect(0, 0, 1200, 850), QImage("://image/cboat.jpg"));
+    mMapPainter->setOpacity(1);
+    //mMapPainter->drawImage(QRect(0, 0, 550, 550), QImage("://image/border.png"));
 
 
     //设置主窗口背景颜色
-    QPainter painter(this);
+//    QPainter painter(this);
 
-    QColor color(246,240,235);
-    painter.setBrush(color);
-    painter.drawRect(this->rect());
+//    QColor color(246,240,235);
+//    painter.setBrush(color);
+//    painter.drawRect(this->rect());
 
-    mMap->Paint(mMapPainter, QPoint(0, 0));
+    mMap->Paint(mMapPainter, QPoint(20, 20));
     
-    mRole->Paint(mMapPainter, QPoint(0, 0));
+    mRole->Paint(mMapPainter, QPoint(20, 20));
 
     if(active) {
         mRole->PaintDialog(mMapPainter, mMap->mPArr[mRole->mRow][mRole->mCol]);
@@ -58,9 +61,10 @@ void Widget::paintEvent(QPaintEvent* event) {
     mMapPainter->end();
 }
 
-void Widget::keyPressEvent(QKeyEvent* event) {
+void Widget1::keyPressEvent(QKeyEvent* event) {
     printf("keypressevent happened\n");
     pick = false;
+    active = false;
     switch(event->key()) {
     case Qt::Key_Space: {
         // 进入战斗系统
@@ -106,7 +110,7 @@ void Widget::keyPressEvent(QKeyEvent* event) {
     }
 }
 
-void Widget::Collision(int _dRow, int _dCol) {
+void Widget1::Collision(int _dRow, int _dCol) {
     int newRow = mRole->mRow + _dRow;
     int newCol = mRole->mCol + _dCol;
     if(newRow < 0 or newRow >= 20 or newCol < 0 or newCol >= 20) return ;

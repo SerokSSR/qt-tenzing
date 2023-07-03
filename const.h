@@ -13,7 +13,7 @@ enum {
     Mount,
 };
 
-constexpr int Size = 30;
+constexpr int Size = 25;
 constexpr int N = 20;
 
 constexpr int Inix = 40, Iniy = 40;

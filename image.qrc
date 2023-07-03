@@ -13,5 +13,7 @@
         <file>image/title.png</file>
         <file>image/snow.jpg</file>
         <file>image/dialog.png</file>
+        <file>image/border.png</file>
+        <file>image/cboat.jpg</file>
     </qresource>
 </RCC>
