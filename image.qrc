@@ -14,6 +14,9 @@
         <file>image/snow.jpg</file>
         <file>image/dialog.png</file>
         <file>image/border.png</file>
-        <file>image/cboat.jpg</file>
+        <file>image/snows.jpg</file>
+        <file>image/tree.png</file>
+        <file>image/elec.png</file>
+        <file>image/cigar.png</file>
     </qresource>
 </RCC>

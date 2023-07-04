@@ -4,8 +4,8 @@
 GameMap::GameMap(QObject *parent)
     : QObject{parent}
 {
-    mRow = 20;
-    mCol = 20;
+    mRow = N;
+    mCol = N;
 
     curRow = 0;
     curCol = 0;
@@ -17,18 +17,19 @@ GameMap::GameMap(QObject *parent)
 void GameMap::Paint(QPainter* _p, QPoint _Pos) {
     for(int i=0; i<mRow; i++) {
         for(int j=0; j<mCol; j++) {
-
-            QString imgUrl= ":/image/chien-pao.png";
-            if(mPArr[i][j] > 3) continue;
+            QString imgUrl;
             switch(mPArr[i][j]) {
             case Grass:
+                //imgUrl = ":/image/tree.png"; break;
                 continue;
             case Cigar:
-                imgUrl = ":/image/1305.jpg"; break;
+                imgUrl = ":/image/cigar.png"; break;
             case Elec:
-                imgUrl = ":/image/1305.jpg"; break;
+                imgUrl = ":/image/elec.png"; break;
             case Jiu:
-                imgUrl = ":/image/1305.jpg"; break;
+                imgUrl = ":/image/ironbundle.png"; break;
+            case Mount:
+                imgUrl = ":/image/tree.png"; break;
             }
             QImage img(imgUrl);
             _p->drawImage(QRect(_Pos.x() + j*Size, _Pos.y() + i*Size, Size, Size), img);
@@ -38,16 +39,16 @@ void GameMap::Paint(QPainter* _p, QPoint _Pos) {
     //_p->drawImage(QRect(600, 20, 200, 100), QImage(":/image/title.png"));
 }
 
-void GameMap::InitByFile(QString fileName) {
+//void GameMap::InitByFile(QString fileName) {
 
-}
+//}
 
 void GameMap::InitByRand() {
     srand(time(NULL));
     for(int i=0; i<mRow; ++i) {
         for(int j=0; j<mCol; ++j) {
-            mPArr[i][j] = rand() % 100;
-            if(mPArr[i][j] > 3) mPArr[i][j] = 0;
+            mPArr[i][j] = rand() % 15;
+            if(mPArr[i][j] > 5) mPArr[i][j] = 0;
         }
     }
     mPArr[0][0] = 0;

@@ -17,9 +17,10 @@ Widget1::Widget1(QWidget *parent)
     mTimer = new QTimer(this);
     mTimer->start(100);
 
+    qDebug() << "Qt version:" << qVersion();
     // 定时调用更新函数
     connect(mTimer, &QTimer::timeout, [this]() {this->update(); });
-    setFixedSize(1200, 850);
+    setFixedSize(900, 800);
     
     active = false;
     pick = false;
@@ -35,10 +36,10 @@ Widget1::~Widget1()
 void Widget1::paintEvent(QPaintEvent* event) {
     mMapPainter->begin(this);
 
-    mMapPainter->setOpacity(0.7);
-    mMapPainter->drawImage(QRect(0, 0, 1200, 850), QImage("://image/cboat.jpg"));
+    mMapPainter->setOpacity(0.2);
+    mMapPainter->drawImage(QRect(0, 0, 1200, 850), QImage(":/image/snows.jpg"));
     mMapPainter->setOpacity(1);
-    //mMapPainter->drawImage(QRect(0, 0, 550, 550), QImage("://image/border.png"));
+    mMapPainter->drawImage(QRect(0, 0, 900, 800), QImage("://image/border.png"));
 
 
     //设置主窗口背景颜色
@@ -48,9 +49,9 @@ void Widget1::paintEvent(QPaintEvent* event) {
 //    painter.setBrush(color);
 //    painter.drawRect(this->rect());
 
-    mMap->Paint(mMapPainter, QPoint(20, 20));
+    mMap->Paint(mMapPainter, QPoint(50, 50));
     
-    mRole->Paint(mMapPainter, QPoint(20, 20));
+    mRole->Paint(mMapPainter, QPoint(50, 50));
 
     if(active) {
         mRole->PaintDialog(mMapPainter, mMap->mPArr[mRole->mRow][mRole->mCol]);
@@ -113,7 +114,7 @@ void Widget1::keyPressEvent(QKeyEvent* event) {
 void Widget1::Collision(int _dRow, int _dCol) {
     int newRow = mRole->mRow + _dRow;
     int newCol = mRole->mCol + _dCol;
-    if(newRow < 0 or newRow >= 20 or newCol < 0 or newCol >= 20) return ;
+    if(newRow < 0 or newRow >= N or newCol < 0 or newCol >= N) return ;
 //    if(mPMap->mPArr[newRow][newCol] == 1) {
 //        return;
 //    }
