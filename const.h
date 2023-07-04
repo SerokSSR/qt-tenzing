@@ -16,8 +16,6 @@ enum {
 constexpr int Size = 50;
 constexpr int N = 12;
 
-constexpr int Inix = 40, Iniy = 40;
-
 const QString dialog[10][2] = {
     {"",""},
     {"你不幸碰触了传统香烟，生命值-5",""},

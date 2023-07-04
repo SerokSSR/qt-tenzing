@@ -17,10 +17,10 @@ GameMap::GameMap(QObject *parent)
 void GameMap::Paint(QPainter* _p, QPoint _Pos) {
     for(int i=0; i<mRow; i++) {
         for(int j=0; j<mCol; j++) {
-            QString imgUrl;
+            QString imgUrl = ":/image/default.png";
+            //QString imgUrl;
             switch(mPArr[i][j]) {
             case Grass:
-                //imgUrl = ":/image/tree.png"; break;
                 continue;
             case Cigar:
                 imgUrl = ":/image/cigar.png"; break;
@@ -30,6 +30,9 @@ void GameMap::Paint(QPainter* _p, QPoint _Pos) {
                 imgUrl = ":/image/ironbundle.png"; break;
             case Mount:
                 imgUrl = ":/image/tree.png"; break;
+            }
+            if(imgUrl == ":/image/default.png") {
+                qDebug("error: %d\n", mPArr[i][j]);
             }
             QImage img(imgUrl);
             _p->drawImage(QRect(_Pos.x() + j*Size, _Pos.y() + i*Size, Size, Size), img);
@@ -48,7 +51,7 @@ void GameMap::InitByRand() {
     for(int i=0; i<mRow; ++i) {
         for(int j=0; j<mCol; ++j) {
             mPArr[i][j] = rand() % 15;
-            if(mPArr[i][j] > 5) mPArr[i][j] = 0;
+            if(mPArr[i][j] > 4) mPArr[i][j] = 0;
         }
     }
     mPArr[0][0] = 0;

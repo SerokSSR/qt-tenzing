@@ -22,7 +22,11 @@ void Role::Move(int _dRow, int _dCol) {
 
 void Role::Paint(QPainter* _p, QPoint _Pos) {
     qDebug() << "role::paint at" << _Pos.x() + mCol*Size << ' ' << _Pos.y() + mRow*Size << Qt::endl;
+    _p->setPen(QPen(Qt::darkRed, 2, Qt::DashLine));
+
     _p->drawImage(QRect(_Pos.x() + mCol*Size, _Pos.y() + mRow*Size, Size, Size), mImg);
+    _p->drawArc(QRect(_Pos.x() + mCol*Size, _Pos.y() + mRow*Size, Size, Size), 0, 360*16);
+    _p->setPen(QPen(Qt::black));
 }
 
 void Role::PaintDialog(QPainter* _p, int _type) {
