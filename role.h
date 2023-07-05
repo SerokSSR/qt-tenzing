@@ -16,7 +16,7 @@ public:
     int mCol;
 
     bool pick;
-
+    bool battle;
     QPoint mPaintPos;
     QImage mImg;
 

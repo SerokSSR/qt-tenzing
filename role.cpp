@@ -21,7 +21,7 @@ void Role::Move(int _dRow, int _dCol) {
 }
 
 void Role::Paint(QPainter* _p, QPoint _Pos) {
-    qDebug() << "role::paint at" << _Pos.x() + mCol*Size << ' ' << _Pos.y() + mRow*Size << Qt::endl;
+    //qDebug() << "role::paint at" << _Pos.x() + mCol*Size << ' ' << _Pos.y() + mRow*Size << Qt::endl;
     _p->setPen(QPen(Qt::darkRed, 2, Qt::DashLine));
 
     _p->drawImage(QRect(_Pos.x() + mCol*Size, _Pos.y() + mRow*Size, Size, Size), mImg);
@@ -35,4 +35,6 @@ void Role::PaintDialog(QPainter* _p, int _type) {
     //_p->drawText(QRect(345, 540, 400, 200), Qt::AlignCenter, "丁真");
     _p->setFont(QFont("思源宋体", 16));
     _p->drawText(QRect(345, 600, 400, 200), Qt::AlignCenter, dialog[_type][0]);
+    if(_type!=3) _p->drawText(QRect(345, 650, 400, 200), Qt::AlignCenter, "（按空格跳过）");
+    else _p->drawText(QRect(345, 650, 400, 200), Qt::AlignCenter, "（按空格进入战斗）");
 }

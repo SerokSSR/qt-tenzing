@@ -1,35 +1,43 @@
-#ifndef WIDGET1_H
-#define WIDGET1_H
+#pragma once
+
+
+#include "qdatetime.h"
+#include "ui_widget.h"
+#ifndef WIDGET_H
+#define WIDGET_H
 
 #include <QWidget>
-#include "gamemap.h"
-#include "role.h"
-
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include<QPropertyAnimation.h>
+#include "widget1.h"
 QT_BEGIN_NAMESPACE
-namespace Ui { class Widget1; }
+namespace Ui { class Widget; }
 QT_END_NAMESPACE
 
-class Widget1 : public QWidget
+class Widget : public QWidget
 {
     Q_OBJECT
 
 public:
-    Widget1(QWidget *parent = nullptr);
-    virtual void paintEvent(QPaintEvent* event);
-    virtual void keyPressEvent(QKeyEvent* event);
-    void Collision(int _dRow, int _dCol);
-    void DrawMap(int x, int y);
-    ~Widget1();
+    friend pokemon;
+    pokemon* pk1;
+    pokemon* pk2;
+    Widget(Widget1* w0,pokemon* p0,QWidget *parent = nullptr);
+    bool attack(pokemon*p1,pokemon*p2,skill& skl1,skill& skl2);
+    void battle(pokemon*p1,pokemon*p2,skill& skl1,skill& skl2);
+    void slow_show(QString qstr);
+    ~Widget();
+    bool eventFilter(QObject *obj, QEvent *event);
+    QPropertyAnimation * anime1;
+    QPropertyAnimation * anime2;
 
+public:
+    QLabel* m_picLable;
 private:
-    Ui::Widget1 *ui;
-    GameMap* mMap;
-    QPainter* mMapPainter;
-    Role* mRole;
-    QTimer* mTimer;
-
-    bool active; int actx, acty, actRole;
-    bool pick; int pickType;
-
+    Ui::Widget *ui;
+    Widget1* w1;
 };
 #endif // WIDGET_H

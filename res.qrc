@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/OIP-C.jpg</file>
+        <file>res/name.png</file>
+        <file>res/1.png</file>
+        <file>res/2.jpg</file>
+        <file>res/name1.png</file>
+        <file>res/3.png</file>
+        <file>res/start.png</file>
+        <file>res/quit.png</file>
+        <file>res/background.png</file>
+        <file>res/chien-pao.png</file>
+        <file>res/hp.png</file>
+        <file>res/ironbundle.png</file>
+        <file>res/msgbar.png</file>
+        <file>res/skillbar.png</file>
+        <file>res/lose1.png</file>
+        <file>res/back1.png</file>
+        <file>res/win1.png</file>
+        <file>res/lose2.jpg</file>
+        <file>res/win2.jpg</file>
+        <file>res/start2.png</file>
+        <file>res/quit2.png</file>
+        <file>res/chienpao.png</file>
+        <file>res/ironhands.png</file>
+        <file>res/skl1.png</file>
+        <file>res/skl2.png</file>
+        <file>res/skl3.png</file>
+        <file>res/skl4.png</file>
+    </qresource>
+</RCC>
