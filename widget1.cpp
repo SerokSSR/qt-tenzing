@@ -43,15 +43,25 @@ Widget1::~Widget1()
 
 
 void Widget1::paintEvent(QPaintEvent* event) {
+    //qDebug()<<pick<<" "<<pickType<<Qt::endl;
     mMapPainter->begin(this);
 
     mMapPainter->setOpacity(0.2);
     mMapPainter->drawImage(QRect(0, 0, 1200, 850), QImage(":/image/snows.jpg"));
     mMapPainter->setOpacity(1);
-    mMapPainter->drawImage(QRect(0, 0, 900, 800), QImage("://image/border.png"));
-
-
-    //设置主窗口背景颜色
+    mMapPainter->drawImage(QRect(50, 50, 600, 600), QImage("://image/background1.png"));
+    mMapPainter->drawImage(QRect(650, 50, 300, 700), QImage("://image/border.png"));
+    mMapPainter->setFont(QFont("点字像素之城", 22));
+    mMapPainter->drawText(QRect(650,100,250,150),Qt::AlignCenter,pao->get_name()+" "+"LV:100");
+    mMapPainter->setPen(QColor(255, 0, 0));
+    mMapPainter->drawText(QRect(650,150,250,150),Qt::AlignCenter,"HP:"+QString::number(pao->get_hp_now(),10)+"/"+QString::number(pao->get_hp(),10));
+    mMapPainter->setPen(QColor(0, 0, 0));
+    mMapPainter->drawText(QRect(650,200,250,150),Qt::AlignCenter,"ATK:"+QString::number(pao->get_atk(),10));
+    mMapPainter->drawText(QRect(650,250,250,150),Qt::AlignCenter,"DEF:"+QString::number(pao->get_def(),10));
+    mMapPainter->drawText(QRect(650,300,250,150),Qt::AlignCenter,"SA:"+QString::number(pao->get_sa(),10));
+    mMapPainter->drawText(QRect(650,350,250,150),Qt::AlignCenter,"SD:"+QString::number(pao->get_sd(),10));
+    mMapPainter->drawText(QRect(650,400,250,150),Qt::AlignCenter,"SPD:"+QString::number(pao->get_spd(),10));
+//设置主窗口背景颜色
 //    QPainter painter(this);
 
 //    QColor color(246,240,235);
@@ -72,15 +82,15 @@ void Widget1::paintEvent(QPaintEvent* event) {
 }
 
 void Widget1::keyPressEvent(QKeyEvent* event) {
-    printf("keypressevent happened\n");
+    //printf("keypressevent happened\n");
     //pick = false;
     //active = false;
     switch(event->key()) {
         case Qt::Key_Space: {
-            if(pick&&pickType==3){
+        if(pick&&pickType>=4){
                 pick=0;
                 this->hide();
-                Widget* w=new Widget(this,this->pao);
+                Widget* w=new Widget(this,this->pao,pickType);
                 w->show();
             }
             pick=false;
@@ -131,7 +141,8 @@ void Widget1::Collision(int _dRow, int _dCol) {
 //    }
     //else move
     mRole->Move(_dRow, _dCol);
-    if(mMap->mPArr[mRole->mRow][mRole->mCol] > 0 and mMap->mPArr[mRole->mRow][mRole->mCol] < 4) {
+    if(mMap->mPArr[mRole->mRow][mRole->mCol] > 0 and mMap->mPArr[mRole->mRow][mRole->mCol] <= 5) {
+        pao->boost(pickType = mMap->mPArr[mRole->mRow][mRole->mCol]);
         pick = true;
         pickType = mMap->mPArr[mRole->mRow][mRole->mCol];
         mMap->mPArr[mRole->mRow][mRole->mCol] = 0;

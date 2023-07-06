@@ -17,14 +17,27 @@ void sleep_msec(int msec){
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     }
 };
-Widget::Widget(Widget1* w0,pokemon* p0,QWidget *parent)
+Widget::Widget(Widget1* w0,pokemon* p0,int idx,QWidget *parent)
     : QWidget(parent)
     , pk1(p0)
     , ui(new Ui::Widget)
     , w1(w0)
 {
-    pk2=new ironhands;
     ui->setupUi(this);
+    if(idx==4) {
+        pk2=new ironhands;
+        QPixmap img(":/image/ironbundle.png");
+        ui->enemy->setPixmap(img.scaledToWidth(ui->enemy->width()));
+        ui->enemy->setPixmap(img.scaledToHeight(ui->enemy->height()));
+    }
+    if(idx==5) {
+        pk2=new Fluttermane;
+        ui->name_label->setText("振翼发");
+        QPixmap img(":/image/Fluttermane.png");
+
+        ui->enemy->setPixmap(img.scaledToWidth(ui->enemy->width()));
+        ui->enemy->setPixmap(img.scaledToHeight(ui->enemy->height()));
+    }
     ui->skl1->setAttribute(Qt::WA_Hover, true);
     ui->skl1->installEventFilter(this);
     ui->skl2->setAttribute(Qt::WA_Hover, true);
@@ -40,7 +53,7 @@ Widget::Widget(Widget1* w0,pokemon* p0,QWidget *parent)
     anime1->setStartValue(QRect{-10,230,351,251});
     anime1->setStartValue(QRect{90,230,351,251});
     anime1->setEasingCurve(QEasingCurve::Linear);
-    anime2=new QPropertyAnimation(ui->label_3,"geometry");
+    anime2=new QPropertyAnimation(ui->enemy,"geometry");
     anime2->setDuration(200);
     anime2->setStartValue(QRect{520,-10,691,361});
     anime2->setStartValue(QRect{420,-10,691,361});
@@ -72,6 +85,7 @@ bool Widget::attack(pokemon* p1,pokemon* p2,skill& skl1,skill&skl2){
     }
     else{
         double damage=(210*p1->get_atk()*skl1.get_pow())/(250*p2->get_def());
+        if(skl1.get_type()=="特殊") damage=(210*p1->get_sa()*skl1.get_pow())/(250*p2->get_sd());
         if(skl1.get_name()!="守住") damage+=2;
         p2->hp_now-=damage;
         if(skl1.get_name()=="疯狂伏特"){

@@ -26,11 +26,14 @@ void GameMap::Paint(QPainter* _p, QPoint _Pos) {
                 imgUrl = ":/image/cigar.png"; break;
             case Elec:
                 imgUrl = ":/image/elec.png"; break;
-            case Mount:
-                imgUrl = ":/image/tree.png"; break;
             case Jiu:
+                imgUrl = ":/image/smoke.png"; break;
+            case Mount:
                 imgUrl = ":/image/ironbundle.png"; break;
+            case Enemy:
+                imgUrl = ":/image/Fluttermane.png"; break;
             }
+
             if(imgUrl == ":/image/default.png") {
                 qDebug("error: %d\n", mPArr[i][j]);
             }
@@ -54,5 +57,10 @@ void GameMap::InitByRand() {
         }
     }
     mPArr[rand()%mRow][rand()%mCol]=4;
+    int tx=rand()%mRow,ty=rand()%mCol;
+    while(mPArr[tx][ty]==4){
+        tx=rand()%mRow,ty=rand()%mCol;
+    }
+    mPArr[tx][ty]=5;
     mPArr[0][0] = 0;
 }

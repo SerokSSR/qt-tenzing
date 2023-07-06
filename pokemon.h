@@ -45,7 +45,20 @@ public:
     int get_hp(){return hp;}
     int get_atk(){return atk;}
     int get_def(){return def;}
+    int get_sa(){return sa;}
+    int get_sd(){return sd;}
+    int get_spd(){return spd;}
     QString get_name(){return name;}
+    void boost(int idx){
+        if(idx==1) hp_now-=25;
+        if(idx==2) {
+            atk+=10;def+=10;
+        }
+        if(idx==3){
+            hp_now+=50;
+            if(hp_now>hp) hp_now=hp;
+        }
+    }
     bool cmpspd(pokemon& p){
         return spd>p.spd;
     }
@@ -96,6 +109,21 @@ public:
     ThunderPunch():skill("雷电拳",15,75,1,"物理"){}
 };
 
+class Moonblast:public skill{
+public:
+    Moonblast():skill("月亮之力",15,95,1,"特殊"){}
+};
+
+class Dazzlinggleam:public skill{
+public:
+    Dazzlinggleam():skill("魔法闪耀",10,80,1,"特殊"){}
+};
+
+class Shadowball:public skill{
+public:
+    Shadowball():skill("暗影球",15,80,1,"特殊"){}
+};
+
 class chienpao:public pokemon{
 public:
     chienpao():pokemon("古剑豹",270,220,247,148,166,121,SuckerPunch(),IcicleCrash(),SacredSword(),Protect()){}
@@ -104,4 +132,8 @@ public:
 class ironhands:public pokemon{
 public:
     ironhands():pokemon("铁臂膀",318,256,94,198,94,126,Wildcharge(),Drainpunch(),ThunderPunch(),Protect()){}
+};
+class Fluttermane:public pokemon{
+public:
+    Fluttermane():pokemon("振翼发",220,103,247,103,247,247,Moonblast(),Shadowball(),Dazzlinggleam(),Protect()){}
 };

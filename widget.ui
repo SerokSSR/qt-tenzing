@@ -128,17 +128,18 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="enemy">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>620</x>
      <y>-10</y>
-     <width>691</width>
-     <height>361</height>
+     <width>301</width>
+     <height>331</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">image: url(:/res/ironbundle.png);</string>
+    <string notr="true">
+</string>
    </property>
    <property name="text">
     <string/>
@@ -195,35 +196,33 @@
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>360</x>
      <y>340</y>
      <width>161</width>
      <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 700 22pt &quot;Microsoft YaHei UI&quot;;
-border-image: url(:/res/chienpao.png);</string>
+    <string notr="true">font: 22pt &quot;点字像素16&quot;;</string>
    </property>
    <property name="text">
-    <string/>
+    <string>古剑豹</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_9">
+  <widget class="QLabel" name="name_label">
    <property name="geometry">
     <rect>
-     <x>220</x>
+     <x>260</x>
      <y>10</y>
      <width>161</width>
      <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 700 22pt &quot;Microsoft YaHei UI&quot;;
-border-image: url(:/res/ironhands.png);</string>
+    <string notr="true">font: 22pt &quot;点字像素16&quot;;</string>
    </property>
    <property name="text">
-    <string/>
+    <string>铁臂膀</string>
    </property>
   </widget>
   <widget class="QLabel" name="msgbar">
@@ -379,11 +378,11 @@ border-image: url(:/res/ironhands.png);</string>
   <zorder>skl2</zorder>
   <zorder>skl3</zorder>
   <zorder>skl4</zorder>
-  <zorder>label_3</zorder>
+  <zorder>enemy</zorder>
   <zorder>label_6</zorder>
   <zorder>label_7</zorder>
   <zorder>label_8</zorder>
-  <zorder>label_9</zorder>
+  <zorder>name_label</zorder>
   <zorder>label_10</zorder>
   <zorder>pp1</zorder>
   <zorder>pp2</zorder>

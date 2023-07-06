@@ -15,5 +15,8 @@
         <file>image/elec.png</file>
         <file>image/cigar.png</file>
         <file>image/default.png</file>
+        <file>image/background1.png</file>
+        <file>image/smoke.png</file>
+        <file>image/Fluttermane.png</file>
     </qresource>
 </RCC>

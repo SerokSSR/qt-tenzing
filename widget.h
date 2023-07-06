@@ -25,7 +25,7 @@ public:
     friend pokemon;
     pokemon* pk1;
     pokemon* pk2;
-    Widget(Widget1* w0,pokemon* p0,QWidget *parent = nullptr);
+    Widget(Widget1* w0,pokemon* p0,int idx,QWidget *parent = nullptr);
     bool attack(pokemon*p1,pokemon*p2,skill& skl1,skill& skl2);
     void battle(pokemon*p1,pokemon*p2,skill& skl1,skill& skl2);
     void slow_show(QString qstr);

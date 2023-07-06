@@ -35,6 +35,6 @@ void Role::PaintDialog(QPainter* _p, int _type) {
     //_p->drawText(QRect(345, 540, 400, 200), Qt::AlignCenter, "丁真");
     _p->setFont(QFont("思源宋体", 16));
     _p->drawText(QRect(345, 600, 400, 200), Qt::AlignCenter, dialog[_type][0]);
-    if(_type!=3) _p->drawText(QRect(345, 650, 400, 200), Qt::AlignCenter, "（按空格跳过）");
+    if(_type<4) _p->drawText(QRect(345, 650, 400, 200), Qt::AlignCenter, "（按空格跳过）");
     else _p->drawText(QRect(345, 650, 400, 200), Qt::AlignCenter, "（按空格进入战斗）");
 }
