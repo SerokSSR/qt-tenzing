@@ -1,4 +1,5 @@
 QT       += core gui
+QT+= multimedia
 QT+= widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -45,8 +46,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    mylarge.qrc \
-    mysource.qrc \
     res.qrc \
     map.qrc \
     image.qrc

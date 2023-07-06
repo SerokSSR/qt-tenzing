@@ -27,5 +27,7 @@
         <file>res/skl2.png</file>
         <file>res/skl3.png</file>
         <file>res/skl4.png</file>
+        <file>res/igs.mp3</file>
+        <file>res/igs.flac</file>
     </qresource>
 </RCC>
