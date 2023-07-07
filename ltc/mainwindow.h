@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <mypushbutton.h>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,5 +23,6 @@ public:
     MyPushButton * quitBtn;
 private:
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H

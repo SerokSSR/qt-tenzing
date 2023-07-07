@@ -23,6 +23,7 @@ public:
     ~Widget1();
 
 private:
+    int enemy_sum;
     Ui::Widget1 *ui;
     GameMap* mMap;
     QPainter* mMapPainter;

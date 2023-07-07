@@ -1,5 +1,5 @@
 QT       += core gui
-QT+= multimedia
+QT += multimedia
 QT+= widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -12,22 +12,22 @@ CONFIG += c++17
 
 SOURCES += \
     form.cpp \
+    lose.cpp \
     main.cpp \
     mainwindow.cpp \
     mypushbutton.cpp \
     widget.cpp \
-    win.cpp \
     gamemap.cpp \
     role.cpp \
     widget1.cpp
 
 HEADERS += \
     form.h \
+    lose.h \
     mainwindow.h \
     mypushbutton.h \
     pokemon.h \
     widget.h \
-    win.h \
     const.h \
     gamemap.h \
     role.h \
@@ -35,10 +35,11 @@ HEADERS += \
 
 FORMS += \
     form.ui \
+    lose.ui \
     mainwindow.ui \
     widget.ui \
-    win.ui \
     widget1.ui
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

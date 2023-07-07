@@ -5,8 +5,12 @@
 #include "widget.h"
 #include "widget1.h"
 #include <QDebug>
+
 #include <QMediaPlayer>
 #include <QAudioOutput>
+
+QMediaPlayer* player = new QMediaPlayer();
+QAudioOutput* audioOutput = new QAudioOutput();
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,20 +21,23 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowIcon(QIcon("://res/2.jpg"));
     setWindowTitle("理塘丁真的奇幻大冒险");
 
-    auto player = new QMediaPlayer(this);
-    auto audioOutput = new QAudioOutput(this);
-    player->setAudioOutput(audioOutput);
-    player->setLoops(QMediaPlayer::Infinite);
-    player->setSource(QUrl("https://cdn2.akioi.eu.org/igs.mp3"));
-    qDebug() << player->source() << Qt::endl;
-    audioOutput->setVolume(50);
-    player->play();
+    // 添加音乐
+    if(not player->isPlaying()) {
+        player->setAudioOutput(audioOutput);
+        player->setLoops(QMediaPlayer::Infinite);
+        player->setSource(QUrl("https://cdn2.akioi.eu.org/ltsu.mp3"));
+        qDebug() << player->source() << Qt::endl;
+        audioOutput->setVolume(10);
+        player->play();
+    }
+
 
     //开始游戏
     startBtn = new MyPushButton("://res/start.png");
     startBtn->setParent(this);
     startBtn->move(50,this->height()*0.4);
     connect(startBtn,&MyPushButton::clicked,[=](){
+        player->stop();
         this->hide();
         Widget1 *a = new Widget1();
         a->show();

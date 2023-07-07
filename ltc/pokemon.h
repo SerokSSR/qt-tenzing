@@ -50,7 +50,10 @@ public:
     int get_spd(){return spd;}
     QString get_name(){return name;}
     void boost(int idx){
-        if(idx==1) hp_now-=25;
+        if(idx==1){
+            hp_now-=25;
+            if(hp_now<1) hp_now=1;
+        }
         if(idx==2) {
             atk+=10;def+=10;
         }

@@ -8,7 +8,19 @@
 #include<windows.h>
 #include<math.h>
 #include<algorithm>
+#include "lose.h"
+
+
+#include <QMediaPlayer>
+#include <QAudioOutput>
+
+#include <QSoundEffect>
+
 int Protect::pro[6]={1000,333,111,37,13,4};
+
+
+QMediaPlayer* player2 = new QMediaPlayer();
+QAudioOutput* audioOutput2 = new QAudioOutput();
 
 void sleep_msec(int msec){
     QTime dieTime = QTime::currentTime().addMSecs(msec);
@@ -24,6 +36,19 @@ Widget::Widget(Widget1* w0,pokemon* p0,int idx,QWidget *parent)
     , w1(w0)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon("://res/2.jpg"));
+    setWindowTitle("理塘丁真的奇幻大冒险");
+
+    // 添加音乐
+    if(not player2->isPlaying()) {
+        player2->setAudioOutput(audioOutput2);
+        player2->setLoops(QMediaPlayer::Infinite);
+        player2->setSource(QUrl("https://cdn2.akioi.eu.org/348521901.mp3"));
+        qDebug() << player2->source() << Qt::endl;
+        audioOutput2->setVolume(1);
+        player2->play();
+    }
+
     if(idx==4) {
         pk2=new ironhands;
         QPixmap img(":/image/ironbundle.png");
@@ -48,6 +73,13 @@ Widget::Widget(Widget1* w0,pokemon* p0,int idx,QWidget *parent)
     ui->skl4->installEventFilter(this);//安装事件过滤器
     ui->hp1->setText(QString::number(pk1->get_hp_now(),10)+"/"+QString::number(pk1->get_hp(),10));
     ui->hp2->setText(QString::number(pk2->get_hp_now(),10)+"/"+QString::number(pk2->get_hp(),10));
+    QPixmap img1(":/res/hp_bar.png");
+    ui->hp_bar1->setPixmap(img1.scaledToWidth(ui->hp_bar1->width()));
+    ui->hp_bar1->setPixmap(img1.scaledToHeight(ui->hp_bar1->height()));
+    ui->hp_bar2->setPixmap(img1.scaledToWidth(ui->hp_bar2->width()));
+    ui->hp_bar2->setPixmap(img1.scaledToHeight(ui->hp_bar2->height()));
+    ui->hp_bar1->setGeometry(470,390,181*pk1->hp_now/pk1->get_hp(),21);
+    ui->hp_bar2->setGeometry(370,60,181*pk2->hp_now/pk2->get_hp(),21);
     anime1=new QPropertyAnimation(ui->label,"geometry");
     anime1->setDuration(200);
     anime1->setStartValue(QRect{-10,230,351,251});
@@ -67,6 +99,7 @@ void Widget::slow_show(QString qstr){
     }
 }
 bool Widget::attack(pokemon* p1,pokemon* p2,skill& skl1,skill&skl2){
+
     if(skl1.get_name()=="守住"){
         int p=rand()%1000;
         if(p<=Protect::pro[p1->suc]) p1->suc++;
@@ -88,8 +121,10 @@ bool Widget::attack(pokemon* p1,pokemon* p2,skill& skl1,skill&skl2){
         if(skl1.get_type()=="特殊") damage=(210*p1->get_sa()*skl1.get_pow())/(250*p2->get_sd());
         if(skl1.get_name()!="守住") damage+=2;
         p2->hp_now-=damage;
+        if(p2->hp_now<0) p2->hp_now=0;
         if(skl1.get_name()=="疯狂伏特"){
             p1->hp_now-=damage/4;
+            if(p1->hp_now<0) p1->hp_now=0;
         }
         if(skl1.get_name()=="守住"&&p1->suc==0) slow_show("   "+p1->get_name()+"使用了"+skl1.get_name()+"但是失败了！");
         else slow_show("   "+p1->get_name()+"使用了"+skl1.get_name());
@@ -97,15 +132,22 @@ bool Widget::attack(pokemon* p1,pokemon* p2,skill& skl1,skill&skl2){
     skl1.use_pp();
     ui->hp1->setText(QString::number(pk1->get_hp_now(),10)+"/"+QString::number(pk1->get_hp(),10));
     ui->hp2->setText(QString::number(pk2->get_hp_now(),10)+"/"+QString::number(pk2->get_hp(),10));
+    ui->hp_bar1->setGeometry(470,390,181*pk1->hp_now/pk1->get_hp(),21);
+    ui->hp_bar2->setGeometry(370,60,181*pk2->hp_now/pk2->get_hp(),21);
     if(pk2->hp_now<=0){
         sleep_msec(1000);
         this->close();
+        player2->stop();
         w1->show();
         return 0;
     }
     if(pk1->hp_now<=0){
         sleep_msec(1000);
         this->close();
+        w1->close();
+        player2->stop();
+        lose* l=new lose;
+        l->show();
         return 0;
     }
     return 1;
@@ -124,6 +166,12 @@ void Widget::battle(pokemon* p1,pokemon* p2,skill& skl1,skill& skl2){
     sleep_msec(500);
     ui->msgbar->setText("");
     sleep_msec(500);
+
+    QSoundEffect effect;
+    effect.setSource(QUrl("https://cdn2.akioi.eu.org/14616.wav"));
+    effect.setLoopCount(1);
+    effect.setVolume(1.0f);
+    effect.play();
     if(skl1.get_name()=="冰柱坠击"){
         int r=rand()%100;
         if(r<30){
