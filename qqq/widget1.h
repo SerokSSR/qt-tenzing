@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "gamemap.h"
 #include "role.h"
+#include "pokemon.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget1; }
@@ -22,12 +23,13 @@ public:
     ~Widget1();
 
 private:
+    int enemy_sum;
     Ui::Widget1 *ui;
     GameMap* mMap;
     QPainter* mMapPainter;
     Role* mRole;
     QTimer* mTimer;
-
+    pokemon* pao;
     bool active; int actx, acty, actRole;
     bool pick; int pickType;
 
