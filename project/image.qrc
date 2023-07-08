@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/background.png</file>
+        <file>image/chien-pao.png</file>
+        <file>image/hp.png</file>
+        <file>image/ironbundle.png</file>
+        <file>image/msgbar.png</file>
+        <file>image/skillbar.png</file>
+        <file>image/title.png</file>
+        <file>image/snow.jpg</file>
+        <file>image/dialog.png</file>
+        <file>image/border.png</file>
+        <file>image/snows.jpg</file>
+        <file>image/tree.png</file>
+        <file>image/elec.png</file>
+        <file>image/cigar.png</file>
+        <file>image/default.png</file>
+        <file>image/background1.png</file>
+        <file>image/smoke.png</file>
+        <file>image/Fluttermane.png</file>
+    </qresource>
+</RCC>
